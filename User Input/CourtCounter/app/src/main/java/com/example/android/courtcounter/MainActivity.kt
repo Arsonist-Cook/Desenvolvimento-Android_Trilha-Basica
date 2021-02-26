@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
     var scoreTeamA: Int = 0
+    var scoreTeamB: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,18 +24,45 @@ class MainActivity : AppCompatActivity() {
         scoreView.text = "$score"
     }
 
-    fun addOnePoint(view: View) {
+    private fun displayForTeamB(score: Int) {
+        val scoreView: TextView = findViewById(R.id.team_b_score)
+        scoreView.text = "$score"
+    }
+
+    fun addOneForTeamA(view: View) {
         scoreTeamA += 1
         displayForTeamA(scoreTeamA)
     }
 
-    fun addTwoPoints(view: View) {
+    fun addTwoForTeamA(view: View) {
         scoreTeamA += 2
         displayForTeamA(scoreTeamA)
     }
 
-    fun addThreePoints(view: View) {
+    fun addThreeForTeamA(view: View) {
         scoreTeamA += 3
         displayForTeamA(scoreTeamA)
+    }
+
+    fun addOneForTeamB(view: View) {
+        scoreTeamB += 1
+        displayForTeamB(scoreTeamB)
+    }
+
+    fun addTwoForTeamB(view: View) {
+        scoreTeamB += 2
+        displayForTeamB(scoreTeamB)
+    }
+
+    fun addThreeForTeamB(view: View) {
+        scoreTeamB += 3
+        displayForTeamB(scoreTeamB)
+    }
+
+    fun resetScore(view: View) {
+        scoreTeamA = 0
+        scoreTeamB = 0
+        displayForTeamA(scoreTeamA)
+        displayForTeamB(scoreTeamB)
     }
 }
