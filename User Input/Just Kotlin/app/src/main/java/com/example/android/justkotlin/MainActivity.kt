@@ -1,10 +1,11 @@
 package com.example.android.justkotlin
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import java.text.NumberFormat
+
 
 class MainActivity : AppCompatActivity() {
     var numberOfCoffees: Int = 0
@@ -28,8 +29,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun displayPrice(number: Double) {
-        val priceTextView: TextView = findViewById(R.id.price_text_input)
-        priceTextView.text = NumberFormat.getCurrencyInstance().format(number)
+        val priceTextView: TextView = findViewById(R.id.price_text_view)
+        priceTextView.text = "Total: ${NumberFormat.getCurrencyInstance().format(number)}"
     }
 
     fun incrementCup(view: View) {
@@ -43,5 +44,8 @@ class MainActivity : AppCompatActivity() {
             display(numberOfCoffees)
         }
     }
-
+    private fun displayMessage(message: String) {
+        val priceTextView:TextView = findViewById(R.id.price_text_view)
+        priceTextView.text = message
+    }
 }
