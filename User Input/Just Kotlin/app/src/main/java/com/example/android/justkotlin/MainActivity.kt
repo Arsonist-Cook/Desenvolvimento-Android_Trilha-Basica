@@ -8,13 +8,12 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doAfterTextChanged
-import androidx.core.widget.doOnTextChanged
 import com.example.android.justkotlin.utils.Order
 
 
 class MainActivity : AppCompatActivity() {
 
-    var order: Order = Order()
+    var order: Order = Order(this)
     var summaryTextView:TextView? = null
     var quantityTextView:TextView? = null
     var editText:EditText? = null
