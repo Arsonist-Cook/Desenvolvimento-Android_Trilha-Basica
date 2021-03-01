@@ -1,51 +1,68 @@
 package com.example.android.justkotlin
 
 import android.os.Bundle
+import android.text.Editable
 import android.view.View
+import android.widget.CheckBox
+import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import java.text.NumberFormat
+import androidx.core.widget.doAfterTextChanged
+import androidx.core.widget.doOnTextChanged
+import com.example.android.justkotlin.utils.Order
 
 
 class MainActivity : AppCompatActivity() {
-    var numberOfCoffees: Int = 0
-    var priceOfCoffee: Double = 5.0
+
+    var order: Order = Order()
+    var summaryTextView:TextView? = null
+    var quantityTextView:TextView? = null
+    var editText:EditText? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        display(numberOfCoffees)
-        displayPrice(numberOfCoffees * priceOfCoffee)
+        startupVariables()
+        displayQuantity()
+    }
+
+    private fun startupVariables(){
+        summaryTextView = findViewById(R.id.summary_text_view)
+        quantityTextView = findViewById(R.id.order_text_input)
+        editText = findViewById(R.id.name_edit_text)
+
+        //hookup Event Listener
+        editText?.doAfterTextChanged { text:Editable? -> order.nameOrder = text.toString() }
     }
 
     fun submitOrder(view: View) {
-        display(numberOfCoffees)
-        displayPrice(numberOfCoffees * priceOfCoffee)
+        displaySummary()
     }
 
-    private fun display(number: Int) {
-        val quantityTextView: TextView = findViewById(R.id.order_text_input)
-        quantityTextView.text = "$number"
+    private fun displayQuantity() {
+        (this.quantityTextView)?.text  = "${order.cupsOfCoffee}"
     }
 
-    private fun displayPrice(number: Double) {
-        val priceTextView: TextView = findViewById(R.id.price_text_view)
-        priceTextView.text = "Total: ${NumberFormat.getCurrencyInstance().format(number)}"
+    private fun displaySummary() {
+        (this.summaryTextView)?.text = order.getSummaryOrder()
+        (this.summaryTextView)?.visibility = View.VISIBLE
     }
 
     fun incrementCup(view: View) {
-        numberOfCoffees++
-        display(numberOfCoffees)
+        this.order.addCoffee()
+        displayQuantity()
     }
 
     fun decrementCup(view: View) {
-        if (numberOfCoffees > 0) {
-            numberOfCoffees--
-            display(numberOfCoffees)
-        }
+        this.order.subtractCoffee()
+        displayQuantity()
     }
-    private fun displayMessage(message: String) {
-        val priceTextView:TextView = findViewById(R.id.price_text_view)
-        priceTextView.text = message
+
+    fun setWhippedCreamTopping(view: View) {
+        (view as CheckBox).isChecked.also { order.hasWhippedCream = it }
+    }
+
+    fun setChocolateTopping(view: View) {
+        (view as CheckBox).isChecked.also { order.hasChocolateTopping = it }
     }
 }
