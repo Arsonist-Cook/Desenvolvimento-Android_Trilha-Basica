@@ -91,12 +91,14 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/summary_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:text="@string/order_summary"
             android:textColor="@color/primaryDarkColor"
-            android:textAllCaps="true" />
+            android:textAllCaps="true"
+            android:visibility="invisible"/>
 
         <TextView
             android:id="@+id/summary_text_view"
@@ -105,7 +107,8 @@
             android:layout_marginBottom="16dp"
             android:lineSpacingExtra="4dp"
             android:textColor="@color/secondaryDarkColor"
-            android:textSize="18sp"/>
+            android:textSize="18sp"
+            android:visibility="gone"/>
 
         <Button
             android:id="@+id/order_btn"

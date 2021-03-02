@@ -18,5 +18,7 @@
     <string name="quantity_summary">Quantity: <xliff:g id="quantity" example="3">%1$d</xliff:g></string>
     <string name="total_cost_summary">Total Cost: <xliff:g id="total_cost" example="$30.00">%1$s</xliff:g></string>
     <string name="greetings_summary">Thank You!</string>
+    <string name="order_to">Order To: <xliff:g id="sender">%1$s</xliff:g></string>
+    <string name="something_whent_wrong">Something Whent Wrong!</string>
 
 </resources>

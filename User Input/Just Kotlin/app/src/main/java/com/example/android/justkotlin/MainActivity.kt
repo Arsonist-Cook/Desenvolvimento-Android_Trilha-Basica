@@ -1,6 +1,9 @@
 package com.example.android.justkotlin
 
+import android.annotation.SuppressLint
+import android.content.Intent
 import android.graphics.Path
+import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
 import android.view.View
@@ -9,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doAfterTextChanged
 import com.example.android.justkotlin.utils.Order
 
+val mailToAddresses = arrayOf("sendmailTo@app.com")
 
 class MainActivity : AppCompatActivity() {
 
@@ -17,6 +21,7 @@ class MainActivity : AppCompatActivity() {
     private var quantityTextView: TextView? = null
     private var editText: EditText? = null
     private var submitBtn: Button? = null
+    private var summaryLabel:TextView? = null
     private var state: OperationState = OperationState.ORDER
 
     enum class OperationState { SUBMIT, ORDER }
@@ -33,6 +38,7 @@ class MainActivity : AppCompatActivity() {
         quantityTextView = findViewById(R.id.order_text_input)
         editText = findViewById(R.id.name_edit_text)
         submitBtn = findViewById(R.id.order_btn)
+        summaryLabel = findViewById(R.id.summary_label)
 
         //hookup Event Listener
         editText?.doAfterTextChanged { text: Editable? ->
@@ -45,13 +51,34 @@ class MainActivity : AppCompatActivity() {
         when (state) {
             (OperationState.SUBMIT) -> {
                 //@TODO implements submit mail to
-                Toast.makeText(this, "Submit Pressed", Toast.LENGTH_SHORT).show()
+
+
+                val sendMailTo: Intent = Intent(Intent.ACTION_SENDTO).apply {
+                    data = Uri.parse("mailto:")
+                    putExtra(Intent.EXTRA_EMAIL, mailToAddresses)
+                    putExtra(
+                        Intent.EXTRA_SUBJECT,
+                        "${getString(R.string.app_name)} ${
+                            getString(
+                                R.string.order_to,
+                                order.nameOrder
+                            )
+                        }"
+                    )
+                    putExtra(Intent.EXTRA_TEXT, order.getSummaryOrder())
+                }
+
+                sendMailTo.resolveActivity(packageManager) ?: startActivity(sendMailTo)
             }
 
             (OperationState.ORDER) -> {
                 displaySummary()
                 submitBtn?.text = getString(R.string.submit)
                 state = OperationState.SUBMIT
+            }
+            else -> {
+                Toast.makeText(this, getString(R.string.something_whent_wrong), Toast.LENGTH_SHORT)
+                    .show()
             }
         }
     }
@@ -63,6 +90,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun displaySummary() {
         (this.summaryTextView)?.text = order.getSummaryOrder()
+        (this.summaryLabel)?.visibility = View.VISIBLE
         (this.summaryTextView)?.visibility = View.VISIBLE
     }
 
@@ -88,7 +116,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun cleanSummary() {
         if (state == OperationState.SUBMIT) {
-            (this.summaryTextView)?.text = ""
+            (this.summaryTextView)?.visibility = View.GONE
+            (this.summaryLabel)?.visibility = View.INVISIBLE
             (this.submitBtn)?.text = getString(R.string.order)
             state = OperationState.ORDER
         }
