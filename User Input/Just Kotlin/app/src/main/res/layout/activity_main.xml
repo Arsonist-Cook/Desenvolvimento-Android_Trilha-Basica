@@ -19,47 +19,47 @@
             android:layout_marginBottom="16dp"
             android:autofillHints="@string/name_text_edit_hint"
             android:hint="@string/name_text_edit_hint"
+            android:inputType="textCapWords"
             android:shadowColor="@color/secondaryLightColor"
-            android:textColorHint="@color/primaryDarkColor"
-            android:inputType="textCapWords" />
+            android:textColorHint="@color/primaryDarkColor" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:textColor="@color/primaryDarkColor"
             android:text="@string/toppings_label"
-            android:textAllCaps="true" />
+            android:textAllCaps="true"
+            android:textColor="@color/primaryDarkColor" />
 
         <CheckBox
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="setWhippedCreamTopping"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
-            android:textColor="@color/primaryDarkColor"
-            android:text="@string/whipped_cream_topping" />
+            android:text="@string/whipped_cream_topping"
+            android:textColor="@color/primaryDarkColor" />
 
         <CheckBox
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:onClick="setChocolateTopping"
-            android:textColor="@color/primaryDarkColor"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
-            android:text="@string/chocolate_topping" />
+            android:text="@string/chocolate_topping"
+            android:textColor="@color/primaryDarkColor" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:text="@string/quantity"
-            android:textColor="@color/primaryDarkColor"
-            android:textAllCaps="true" />
+            android:textAllCaps="true"
+            android:textColor="@color/primaryDarkColor" />
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:orientation="horizontal">
@@ -69,8 +69,8 @@
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:onClick="decrementCup"
-                android:textColor="@color/primaryTextColor"
-                android:text="@string/subtract" />
+                android:text="@string/subtract"
+                android:textColor="@color/primaryTextColor" />
 
             <TextView
                 android:id="@+id/order_text_input"
@@ -86,36 +86,36 @@
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:onClick="incrementCup"
-                android:textColor="@color/primaryTextColor"
-                android:text="@string/add" />
+                android:text="@string/add"
+                android:textColor="@color/primaryTextColor" />
         </LinearLayout>
 
         <TextView
             android:id="@+id/summary_label"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:text="@string/order_summary"
-            android:textColor="@color/primaryDarkColor"
             android:textAllCaps="true"
-            android:visibility="invisible"/>
+            android:textColor="@color/primaryDarkColor"
+            android:visibility="invisible" />
 
         <TextView
             android:id="@+id/summary_text_view"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:lineSpacingExtra="4dp"
             android:textColor="@color/secondaryDarkColor"
             android:textSize="18sp"
-            android:visibility="gone"/>
+            android:visibility="gone" />
 
         <Button
             android:id="@+id/order_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="submitOrder"
-            android:textColor="@color/primaryTextColor"
-            android:text="@string/order" />
+            android:text="@string/order"
+            android:textColor="@color/primaryTextColor" />
     </LinearLayout>
 </ScrollView>
