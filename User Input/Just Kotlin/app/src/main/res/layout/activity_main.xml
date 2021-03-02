@@ -19,12 +19,15 @@
             android:layout_marginBottom="16dp"
             android:autofillHints="@string/name_text_edit_hint"
             android:hint="@string/name_text_edit_hint"
+            android:shadowColor="@color/secondaryLightColor"
+            android:textColorHint="@color/primaryDarkColor"
             android:inputType="textCapWords" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
+            android:textColor="@color/primaryDarkColor"
             android:text="@string/toppings_label"
             android:textAllCaps="true" />
 
@@ -34,6 +37,7 @@
             android:onClick="setWhippedCreamTopping"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
+            android:textColor="@color/primaryDarkColor"
             android:text="@string/whipped_cream_topping" />
 
         <CheckBox
@@ -41,6 +45,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:onClick="setChocolateTopping"
+            android:textColor="@color/primaryDarkColor"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
             android:text="@string/chocolate_topping" />
@@ -50,6 +55,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:text="@string/quantity"
+            android:textColor="@color/primaryDarkColor"
             android:textAllCaps="true" />
 
         <LinearLayout
@@ -63,6 +69,7 @@
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:onClick="decrementCup"
+                android:textColor="@color/primaryTextColor"
                 android:text="@string/subtract" />
 
             <TextView
@@ -71,7 +78,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:text="@string/quantity_Startup"
-                android:textColor="@color/black"
+                android:textColor="@color/primaryDarkColor"
                 android:textSize="16sp" />
 
             <Button
@@ -79,6 +86,7 @@
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:onClick="incrementCup"
+                android:textColor="@color/primaryTextColor"
                 android:text="@string/add" />
         </LinearLayout>
 
@@ -87,6 +95,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:text="@string/order_summary"
+            android:textColor="@color/primaryDarkColor"
             android:textAllCaps="true" />
 
         <TextView
@@ -94,14 +103,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:textColor="@color/black"
-            android:textSize="16sp"/>
+            android:lineSpacingExtra="4dp"
+            android:textColor="@color/secondaryDarkColor"
+            android:textSize="18sp"/>
 
         <Button
             android:id="@+id/order_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="submitOrder"
+            android:textColor="@color/primaryTextColor"
             android:text="@string/order" />
     </LinearLayout>
 </ScrollView>

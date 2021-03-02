@@ -1,3 +1,5 @@
+@file:Suppress("SpellCheckingInspection")
+
 package com.example.android.justkotlin
 
 import androidx.test.platform.app.InstrumentationRegistry
