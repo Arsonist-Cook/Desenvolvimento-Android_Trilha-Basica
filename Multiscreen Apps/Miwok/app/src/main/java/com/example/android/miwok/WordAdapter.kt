@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.ImageView
 import android.widget.TextView
 
 class WordAdapter(context: Context, words: ArrayList<Word>) :
@@ -17,6 +18,12 @@ class WordAdapter(context: Context, words: ArrayList<Word>) :
 
         // Get the {@link Word} object located at this position in the list
         val word: Word? = getItem(position)
+        val imageView: ImageView? = listItemView.findViewById(R.id.image)
+        if (word?.hasImage() == true) {
+            word?.imageResourceId?.let { return@let imageView?.setImageResource(it) }
+        } else {
+            imageView?.visibility = View.GONE
+        }
         val defaultTextView: TextView? = listItemView.findViewById(R.id.default_text_view)
         defaultTextView?.text = word?.defaultTranslation
 
