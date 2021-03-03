@@ -26,7 +26,7 @@ class WordAdapter(context: Context, words: ArrayList<Word>, catColor: Int) :
         val imageView: ImageView? = listItemView.findViewById(R.id.image)
 
         if (word?.hasImage() == true) {
-            word.imageResourceId.let { return@let imageView?.setImageResource(it) }
+            imageView?.setImageResource(word?.imageResourceId)
         } else {
             imageView?.visibility = View.GONE
         }
