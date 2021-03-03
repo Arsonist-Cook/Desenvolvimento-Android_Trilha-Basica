@@ -9,7 +9,7 @@ import android.widget.ListView
 import androidx.appcompat.app.AppCompatActivity
 
 class NumbersActivity : AppCompatActivity() {
-    private lateinit var mediaPlayer: MediaPlayer
+    private var mediaPlayer: MediaPlayer? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,9 +34,17 @@ class NumbersActivity : AppCompatActivity() {
         listView.onItemClickListener =
             AdapterView.OnItemClickListener() { adapterView: AdapterView<*>, view1: View, i: Int, l: Long ->
                 //Toast.makeText(this, "Item Clicked", Toast.LENGTH_SHORT).show()
-                val word:Word  = adapterView . getItemAtPosition (i) as Word
+                val word: Word = adapterView.getItemAtPosition(i) as Word
+                //releaseMediaPlayer() //Release resources before playback
+                releaseMediaPlayer()
                 mediaPlayer = MediaPlayer.create(this, word.audioResourceId)
-                mediaPlayer.start()
+                mediaPlayer?.start()
+                mediaPlayer?.setOnCompletionListener { releaseMediaPlayer() }
             }
+    }
+
+    private fun releaseMediaPlayer() {
+        mediaPlayer?.release()
+        mediaPlayer = null
     }
 }
