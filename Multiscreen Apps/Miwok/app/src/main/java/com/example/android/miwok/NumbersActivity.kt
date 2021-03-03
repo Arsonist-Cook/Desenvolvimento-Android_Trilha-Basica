@@ -9,7 +9,8 @@ class NumbersActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_numbers)
-        var words: ArrayList<Word> = ArrayList<Word>()
+
+        val words: ArrayList<Word> = ArrayList<Word>()
         words.add(Word("one", "lutti", R.drawable.number_one))
         words.add(Word("two", "otiiko", R.drawable.number_two))
         words.add(Word("three", "tolookosu", R.drawable.number_three))
@@ -21,8 +22,8 @@ class NumbersActivity : AppCompatActivity() {
         words.add(Word("nine", "wo’e", R.drawable.number_nine))
         words.add(Word("ten", "na’aacha", R.drawable.number_ten))
 
-        var listAdapter: WordAdapter = WordAdapter(this, words)
-        var listView: ListView = findViewById<ListView>(R.id.list)
+        val listAdapter: WordAdapter = WordAdapter(this, words, R.color.category_numbers)
+        val listView: ListView = findViewById<ListView>(R.id.list)
         listView.adapter = listAdapter
     }
 }
