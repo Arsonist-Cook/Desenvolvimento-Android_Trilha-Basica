@@ -63,4 +63,9 @@ class FamilyActivity : AppCompatActivity() {
         mediaPlayer?.release()
         mediaPlayer = null
     }
+
+    override fun onStop() {
+        super.onStop()
+        releaseMediaPlayer()
+    }
 }

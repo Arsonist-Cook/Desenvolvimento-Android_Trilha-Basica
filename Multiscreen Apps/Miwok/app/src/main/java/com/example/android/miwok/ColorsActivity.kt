@@ -51,4 +51,9 @@ class ColorsActivity : AppCompatActivity() {
         mediaPlayer?.release()
         mediaPlayer = null
     }
+
+    override fun onStop() {
+        super.onStop()
+        releaseMediaPlayer()
+    }
 }
