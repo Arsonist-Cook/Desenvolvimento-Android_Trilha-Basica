@@ -1,5 +1,8 @@
 package com.example.android.miwok
 
+import android.app.Service
+import android.media.AudioFocusRequest
+import android.media.AudioManager
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.view.View
@@ -10,6 +13,18 @@ import androidx.appcompat.app.AppCompatActivity
 
 class NumbersActivity : AppCompatActivity() {
     private var mediaPlayer: MediaPlayer? = null
+    private lateinit var audioManager: AudioManager
+    private val onChangeFocusChangeListener: AudioManager.OnAudioFocusChangeListener =
+        AudioManager.OnAudioFocusChangeListener { focusChange ->
+            if (focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT || focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK) {
+                mediaPlayer?.pause()
+                mediaPlayer?.seekTo(0)
+            } else if (focusChange == AudioManager.AUDIOFOCUS_GAIN) {
+                mediaPlayer?.start()
+            }else if (focusChange == AudioManager.AUDIOFOCUS_LOSS) {
+                mediaPlayer?.release()
+            }
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +45,7 @@ class NumbersActivity : AppCompatActivity() {
         val listAdapter: WordAdapter = WordAdapter(this, words, R.color.category_numbers)
         val listView: ListView = findViewById<ListView>(R.id.list)
         listView.adapter = listAdapter
+        audioManager = getSystemService(Service.AUDIO_SERVICE) as AudioManager
 
         listView.onItemClickListener =
             AdapterView.OnItemClickListener() { adapterView: AdapterView<*>, view1: View, i: Int, l: Long ->
@@ -38,8 +54,20 @@ class NumbersActivity : AppCompatActivity() {
                 //releaseMediaPlayer() //Release resources before playback
                 releaseMediaPlayer()
                 mediaPlayer = MediaPlayer.create(this, word.audioResourceId)
-                mediaPlayer?.start()
                 mediaPlayer?.setOnCompletionListener { releaseMediaPlayer() }
+
+                val requestFocusResult = if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.O) {
+                    audioManager.requestAudioFocus(onChangeFocusChangeListener,
+                        AudioManager.STREAM_MUSIC,
+                        AudioManager.AUDIOFOCUS_GAIN_TRANSIENT)
+                }else{
+                    val focusRequest = AudioFocusRequest.Builder(AudioManager.STREAM_MUSIC).build()
+                    audioManager.requestAudioFocus(focusRequest)
+                }
+                if (requestFocusResult == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
+                    mediaPlayer?.start()
+                }
+
             }
     }
 
